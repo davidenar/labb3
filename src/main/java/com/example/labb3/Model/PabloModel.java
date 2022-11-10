@@ -5,6 +5,10 @@ import javafx.beans.property.*;
 import javafx.scene.paint.Color;
 
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Path;
 import java.util.ArrayList;
 
 public class PabloModel {
@@ -14,7 +18,7 @@ public class PabloModel {
     ObjectProperty<ShapeType> currentShapeType = new SimpleObjectProperty<>(ShapeType.CIRCLE);
     BooleanProperty selectMode = new SimpleBooleanProperty();
 
-    public BooleanProperty selectModeProperty(){
+    public BooleanProperty selectModeProperty() {
         return selectMode;
     }
 
@@ -72,5 +76,65 @@ public class PabloModel {
 
     public void setCurrentSize(double currentSize) {
         this.currentSize.set(currentSize);
+    }
+
+    public void modifySelectedShape() {
+        for (Shape s : selectedShapes) {
+            s.setColor(getCurrentColor());
+            s.setSize(getCurrentSize());
+        }
+    }
+
+    public void saveToFile(Path file) {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("<svg version=\"1.1\" width=\"600\" height=\"600\" xmlns=\"http://www.w3.org/2000/svg\">\n");
+
+        for (Shape s : shapesList) {
+            System.out.println(s);
+            if (s.type == ShapeType.CIRCLE) {
+                System.out.println(s);
+
+                sb.append("<circle cx=\"").append(s.getX()).
+                        append("\" cy=\"").append(s.getY()).
+                        append("\" r=\"").append(s.getSize() / 2).
+                        append("\" stroke=\"").append(toHexString(s.getColor())).
+                        append("\" fill=\"").append(toHexString(s.getColor())).
+                        append("\" stroke-width=\"1\"").
+                        append("/>\n");
+
+            } else if (s.type == ShapeType.SQUARE) {
+                sb.append("<rect cx=\"").append(s.getX()).
+                        append("\" cy=\"").append(s.getY()).
+                        append("\" width=\"").append(s.getSize()).
+                        append("\" height=\"").append(s.getSize()).
+                        append("\" stroke=\"").append(toHexString(s.getColor())).
+                        append("\" fill=\"").append(toHexString(s.getColor())).
+                        append("\" stroke-width=\"1\"").
+                        append("/>\n");
+            }
+        }
+        sb.append("</svg>");
+        try {
+            FileWriter writeFile = new FileWriter(file.toFile());
+
+            writeFile.write(sb.toString());
+
+            writeFile.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private String format(double val) {
+        String in = Integer.toHexString((int) Math.round(val * 255));
+        return in.length() == 1 ? "0" + in : in;
+    }
+
+    public String toHexString(Color value) {
+        return "#" + (format(value.getRed()) + format(value.getGreen()) + format(value.getBlue()) + format(value.getOpacity()))
+                .toUpperCase();
     }
 }

@@ -12,6 +12,8 @@ public class PabloApplication extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(PabloApplication.class.getResource("pablo-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 600, 600);
+        PabloController  controller = fxmlLoader.getController();
+        controller.setStage(stage);
         stage.setTitle("Pablo");
         stage.setScene(scene);
         stage.show();
