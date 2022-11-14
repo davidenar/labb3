@@ -4,12 +4,11 @@ package com.example.labb3.Model;
 import javafx.beans.property.*;
 import javafx.scene.paint.Color;
 
-
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class PabloModel {
 
@@ -91,9 +90,7 @@ public class PabloModel {
         sb.append("<svg version=\"1.1\" width=\"600\" height=\"600\" xmlns=\"http://www.w3.org/2000/svg\">\n");
 
         for (Shape s : shapesList) {
-            System.out.println(s);
-            if (s.type == ShapeType.CIRCLE) {
-                System.out.println(s);
+            if (s instanceof Circle) {
 
                 sb.append("<circle cx=\"").append(s.getX()).
                         append("\" cy=\"").append(s.getY()).
@@ -103,7 +100,7 @@ public class PabloModel {
                         append("\" stroke-width=\"1\"").
                         append("/>\n");
 
-            } else if (s.type == ShapeType.SQUARE) {
+            } else if (s instanceof Square) {
                 sb.append("<rect cx=\"").append(s.getX()).
                         append("\" cy=\"").append(s.getY()).
                         append("\" width=\"").append(s.getSize()).
@@ -136,5 +133,12 @@ public class PabloModel {
     public String toHexString(Color value) {
         return "#" + (format(value.getRed()) + format(value.getGreen()) + format(value.getBlue()) + format(value.getOpacity()))
                 .toUpperCase();
+    }
+    public void undo() {
+        shapesList.remove(shapesList.size() - 1);
+    }
+
+    public void resetSelectedShapes() {
+        selectedShapes.clear();
     }
 }

@@ -28,6 +28,7 @@ public class PabloController {
     public Button saveButton;
 
     public Stage stage;
+    public Button undoButton;
 
 
     ObservableList<ShapeType> shapeTypesList = FXCollections.observableArrayList(ShapeType.values());
@@ -48,7 +49,7 @@ public class PabloController {
     public void onCanvasClicked(MouseEvent mouseEvent) {
         if (model.isSelectMode()) {
             for (Shape s : model.getShapes()) {
-                if (s.isSelected(s.getX(), s.getY())) {
+                if (s.isSelected(mouseEvent.getX(), mouseEvent.getY())) {
                     model.getSelectedShapes().add(s);
                 }
 
@@ -67,6 +68,7 @@ public class PabloController {
     void executeChanges(ActionEvent mouseEvent) {
         model.modifySelectedShape();
         drawController();
+        model.resetSelectedShapes();
     }
 
     void drawController() {
@@ -76,6 +78,11 @@ public class PabloController {
         for (Shape s : model.getShapes()) {
             s.draw(context);
         }
+    }
+
+    public void onUndoButton(ActionEvent actionEvent) {
+        model.undo();
+        drawController();
     }
 
     public void onSaveButtonAction(ActionEvent actionEvent) {

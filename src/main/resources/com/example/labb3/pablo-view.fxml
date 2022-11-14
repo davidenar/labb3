@@ -12,4 +12,5 @@
    <ChoiceBox fx:id="choiceBox" layoutX="44.0" layoutY="29.0" prefWidth="150.0" />
    <Button fx:id="executeButton" layoutX="472.0" layoutY="29.0" mnemonicParsing="false" onAction="#executeChanges" text="Execute changes" />
    <Button fx:id="saveButton" layoutX="518.0" layoutY="70.0" mnemonicParsing="false" onAction="#onSaveButtonAction" text="Save" />
+   <Button fx:id="undoButton" layoutX="446.0" layoutY="70.0" mnemonicParsing="false" onAction="#onUndoButton" text="Undo" />
 </AnchorPane>

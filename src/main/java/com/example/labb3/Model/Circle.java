@@ -21,7 +21,7 @@ public class Circle extends Shape {
         double xEdge = x - (getX());
         double yEdge = y - (getY());
         double distance = Math.sqrt((xEdge * xEdge) + (yEdge * yEdge));
-        return distance <= getSize();
+        return distance <= getSize()/2;
     }
 
 }
