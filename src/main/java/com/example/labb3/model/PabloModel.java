@@ -1,4 +1,4 @@
-package com.example.labb3.Model;
+package com.example.labb3.model;
 
 
 import javafx.beans.property.*;
@@ -8,7 +8,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class PabloModel {
 

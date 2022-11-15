@@ -1,8 +1,8 @@
 package com.example.labb3;
 
-import com.example.labb3.Model.PabloModel;
-import com.example.labb3.Model.Shape;
-import com.example.labb3.Model.ShapeType;
+import com.example.labb3.model.PabloModel;
+import com.example.labb3.model.Shape;
+import com.example.labb3.model.ShapeType;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -51,6 +51,10 @@ public class PabloController {
             for (Shape s : model.getShapes()) {
                 if (s.isSelected(mouseEvent.getX(), mouseEvent.getY())) {
                     model.getSelectedShapes().add(s);
+                    for (Shape t :
+                            model.getSelectedShapes()) {
+                        System.out.println(t);
+                    }
                 }
 
             }

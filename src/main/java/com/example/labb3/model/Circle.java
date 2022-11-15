@@ -1,4 +1,4 @@
-package com.example.labb3.Model;
+package com.example.labb3.model;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
