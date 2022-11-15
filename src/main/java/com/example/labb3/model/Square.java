@@ -18,8 +18,8 @@ public class Square extends Shape {
 
     @Override
     public boolean isSelected(double x, double y) {
-        double xEdge = x - (getSize() / 2);
-        double yEdge = y - (getSize() / 2);
+        double xEdge = getX() - (getSize() / 2);
+        double yEdge = getY() - (getSize() / 2);
 
         return x >= xEdge &&
                 x <= xEdge + ((getSize())) &&
